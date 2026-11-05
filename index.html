@@ -6,101 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpendWise | Budget Tracker</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <header>
-        <h1>SpendWise</h1>
-        <p>Manage your money. Control your spending.</p>
-    </header>
+<header>
+    <h1>💰 SpendWise</h1>
+    <p>Take control of your money, one expense at a time.</p>
+</header>
 
-    <main class="container">
+<main class="container">
 
-        <section class="welcome">
-            <h2>Welcome to SpendWise</h2>
-            <p>Track your budget and understand where your money goes.</p>
-        </section>
+    <section class="budget-section">
+        <h2>Monthly Budget</h2>
+        <div class="budget-input">
+            <input type="number" id="budgetInput"
+                placeholder="Enter your budget" min="0">
+            <button id="setBudgetBtn">Set Budget</button>
+        </div>
+        <p id="budgetMessage">Set your monthly budget to begin.</p>
+    </section>
 
-        <section class="summary">
-            <div class="card">
-                <h3>Total Budget</h3>
-                <p id="budget">KES 0.00</p>
-            </div>
+    <section class="dashboard">
+        <div class="card">
+            <h3>Total Budget</h3>
+            <p id="totalBudget">KSh 0.00</p>
+        </div>
 
-            <div class="card">
-                <h3>Total Expenses</h3>
-                <p id="expenses">KES 0.00</p>
-            </div>
+        <div class="card">
+            <h3>Total Expenses</h3>
+            <p id="totalExpenses">KSh 0.00</p>
+        </div>
 
-            <div class="card">
-                <h3>Remaining Balance</h3>
-                <p id="balance">KES 0.00</p>
-            </div>
-        </section>
+        <div class="card">
+            <h3>Remaining Balance</h3>
+            <p id="remainingBalance">KSh 0.00</p>
+        </div>
+    </section>
 
-        <section class="form-section">
-            <h2>Set Your Budget</h2>
+    <section class="expense-section">
+        <h2>Add New Expense</h2>
 
-            <form id="budgetForm">
-                <label for="budgetInput">Enter your budget (KES)</label>
-                <input
-                    type="number"
-                    id="budgetInput"
-                    min="0.01"
-                    step="0.01"
-                    placeholder="e.g. 50000"
-                    required
-                >
+        <form id="expenseForm">
+            <input type="text" id="expenseName"
+                placeholder="Expense name" required>
 
-                <button type="submit">Set Budget</button>
-            </form>
-        </section>
+            <input type="number" id="expenseAmount"
+                placeholder="Amount (KSh)" min="0.01"
+                step="0.01" required>
 
-        <section class="form-section">
-            <h2>Add an Expense</h2>
+            <select id="expenseCategory" required>
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+            </select>
 
-            <form id="expenseForm">
-                <label for="expenseName">Expense Name</label>
-                <input
-                    type="text"
-                    id="expenseName"
-                    placeholder="e.g. Food"
-                    required
-                >
+            <button type="submit">Add Expense</button>
+        </form>
+    </section>
 
-                <label for="expenseAmount">Expense Amount (KES)</label>
-                <input
-                    type="number"
-                    id="expenseAmount"
-                    min="0.01"
-                    step="0.01"
-                    placeholder="e.g. 5000"
-                    required
-                >
+    <section class="transactions">
+        <h2>Recent Transactions</h2>
 
-                <button type="submit">Add Expense</button>
-            </form>
-        </section>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-        <section class="expenses-section">
-            <h2>Recent Expenses</h2>
-            <ul id="expenseList">
-                <li>No expenses added yet.</li>
-            </ul>
-        </section>
+                <tbody id="expenseList">
+                    <!-- JavaScript displays expenses here -->
+                </tbody>
+            </table>
+        </div>
 
-        <section class="prompt-section">
-            <h2>JavaScript Prompt Demo</h2>
-            <p>Enter your budget and expenses using JavaScript prompts.</p>
-            <button id="promptButton">Try Budget Calculator</button>
-        </section>
+        <p id="emptyMessage">No expenses recorded yet.</p>
+    </section>
 
-    </main>
+</main>
 
-    <footer>
-        <p>&copy; 2026 SpendWise. Simple Financial Management for Everyone.</p>
-    </footer>
+<footer>
+    <p>© 2026 SpendWise | Smart Budgeting Made Simple</p>
+</footer>
 
+<script src="script.js"></script>
 </body>
 </html>
