@@ -1,102 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpendWise | Budget Tracker</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your spending, manage your monthly budget, and stay on top of your money with SpendWise.">
+  <title>SpendWise | Interactive Budget Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <header class="site-header">
+    <div class="header-content">
+      <p class="eyebrow">YOUR PERSONAL BUDGET COMPANION</p>
+      <h1>💰 SpendWise</h1>
+      <p>Take control of your money, one expense at a time.</p>
+    </div>
+  </header>
 
-<header>
-    <h1>💰 SpendWise</h1>
-    <p>Take control of your money, one expense at a time.</p>
-</header>
-
-<main class="container">
-
-    <section class="budget-section">
-        <h2>Monthly Budget</h2>
-        <div class="budget-input">
-            <input type="number" id="budgetInput"
-                placeholder="Enter your budget" min="0">
-            <button id="setBudgetBtn">Set Budget</button>
+  <main>
+    <section class="panel" aria-labelledby="budget-heading">
+      <h2 id="budget-heading">Set your monthly budget</h2>
+      <form id="budget-form" class="row">
+        <div class="field budget-field">
+          <label for="budget-input">Monthly budget (KES)</label>
+          <input id="budget-input" name="budget" type="number" min="0.01" step="0.01" placeholder="e.g. 40000" required inputmode="decimal">
         </div>
-        <p id="budgetMessage">Set your monthly budget to begin.</p>
+        <button type="submit">Set budget</button>
+      </form>
+      <p id="status-message" class="status neutral" role="status" aria-live="polite">Set a budget to get started.</p>
     </section>
 
-    <section class="dashboard">
-        <div class="card">
-            <h3>Total Budget</h3>
-            <p id="totalBudget">KSh 0.00</p>
+    <section class="panel" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading">Your dashboard</h2>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">Monthly budget</span>
+          <span class="stat-value">KES <span id="stat-budget">0.00</span></span>
         </div>
-
-        <div class="card">
-            <h3>Total Expenses</h3>
-            <p id="totalExpenses">KSh 0.00</p>
+        <div class="stat">
+          <span class="stat-label">Total spent</span>
+          <span class="stat-value">KES <span id="stat-spent">0.00</span></span>
         </div>
-
-        <div class="card">
-            <h3>Remaining Balance</h3>
-            <p id="remainingBalance">KSh 0.00</p>
+        <div class="stat">
+          <span class="stat-label">Remaining balance</span>
+          <span class="stat-value">KES <span id="stat-remaining">0.00</span></span>
         </div>
+        <div class="stat">
+          <span class="stat-label">Expenses recorded</span>
+          <span id="stat-count" class="stat-value">0</span>
+        </div>
+      </div>
+      <div class="progress-label">
+        <span>Budget used</span>
+        <span id="budget-percent">0%</span>
+      </div>
+      <div id="bar" class="bar" role="progressbar" aria-label="Monthly budget used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="bar-fill" class="bar-fill"></div>
+      </div>
+      <p id="top-category" class="muted"></p>
     </section>
 
-    <section class="expense-section">
-        <h2>Add New Expense</h2>
+    <section class="panel" aria-labelledby="expense-heading">
+      <h2 id="expense-heading">Add a new expense</h2>
+      <form id="expense-form" class="grid-form" novalidate>
+        <div class="field">
+          <label for="name">Expense name</label>
+          <input id="name" name="name" type="text" placeholder="e.g. Groceries" maxlength="80" required>
+        </div>
+        <div class="field">
+          <label for="amount">Amount (KES)</label>
+          <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="">Choose category</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button type="submit">Add expense</button>
+      </form>
+      <p id="form-error" class="error" role="alert" aria-live="polite"></p>
+    </section>
 
-        <form id="expenseForm">
-            <input type="text" id="expenseName"
-                placeholder="Expense name" required>
-
-            <input type="number" id="expenseAmount"
-                placeholder="Amount (KSh)" min="0.01"
-                step="0.01" required>
-
-            <select id="expenseCategory" required>
-                <option value="">Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Transport">Transport</option>
-                <option value="Shopping">Shopping</option>
-                <option value="Bills">Bills</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Other">Other</option>
+    <section class="panel" aria-labelledby="transactions-heading">
+      <div class="list-head">
+        <h2 id="transactions-heading">Recent transactions</h2>
+        <div class="row list-actions">
+          <div class="field filter-field">
+            <label for="filter">Filter by category</label>
+            <select id="filter">
+              <option value="All">All categories</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Bills">Bills</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">Other</option>
             </select>
-
-            <button type="submit">Add Expense</button>
-        </form>
-    </section>
-
-    <section class="transactions">
-        <h2>Recent Transactions</h2>
-
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Expense</th>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-
-                <tbody id="expenseList">
-                    <!-- JavaScript displays expenses here -->
-                </tbody>
-            </table>
+          </div>
+          <button id="clear-btn" class="secondary" type="button">Clear all</button>
         </div>
-
-        <p id="emptyMessage">No expenses recorded yet.</p>
+      </div>
+      <ul id="expense-list" class="expense-list" aria-live="polite" aria-label="Expense records"></ul>
     </section>
+  </main>
 
-</main>
-
-<footer>
-    <p>© 2026 SpendWise | Smart Budgeting Made Simple</p>
-</footer>
-
-<script src="script.js"></script>
+  <footer>
+    <p>© 2026 SpendWise · Small steps make a big difference.</p>
+  </footer>
 </body>
 </html>

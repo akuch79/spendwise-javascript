@@ -1,99 +1,47 @@
+# SpendWise — Interactive Budget Tracker
 
-# SpendWise - JavaScript Foundation
+SpendWise is a responsive budgeting app built with HTML, CSS, and vanilla JavaScript. Set a monthly budget, record expenses by category, and see your spending and remaining balance update on the dashboard.
 
-## Project Description
+## Improvements made this week
 
-SpendWise is a simple personal budget management application.
-It helps users manage their money by setting a budget,
-recording expenses, and calculating their remaining balance.
+- Replaced the earlier console/prompt-focused flow with interactive budget and expense forms on the page.
+- Added a live dashboard with total budget, spending, remaining balance, expense count, budget progress, and biggest spending category.
+- Added expense categories, category filtering, individual deletion, and a clear-all action.
+- Added budget warnings, input validation, responsive styling, accessible labels/status feedback, and browser storage so data remains after a reload.
+- Aligned the HTML element IDs and classes with the JavaScript and stylesheet so all parts of the app work together.
 
-The application uses HTML, CSS, and JavaScript.
+## JavaScript concepts
 
-## Features
+### Conditionals
+`evaluateBudget()` uses `if`/`else if` statements to decide which message and style to show: no budget, on track, approaching the limit, or over budget. Other conditionals validate form values, apply filters, and show empty-state messages.
 
-- Set a personal budget.
-- Add and record expenses.
-- Calculate total expenses.
-- Calculate remaining balance.
-- Collect information using JavaScript prompts.
-- Display budget information in the browser console.
-- View expenses on the dashboard.
+### Arrays and loops
+The `expenses` array stores multiple expense objects. Each record contains an ID, name, amount, and category. `for` loops process the records to calculate spending and category totals and to render the filtered transaction list. Array methods are used to remove records and validate loaded data.
 
-## JavaScript Concepts Implemented
+### DOM updates
+The `renderDashboard()` and `renderList()` functions update page content with `textContent`, element attributes, and generated DOM elements. After the data changes, `render()` refreshes the dashboard and transaction list. Expense names are added as text rather than HTML so user input is not interpreted as markup.
 
-### 1. Variables
+### Events and user interactions
+Submit event listeners handle the budget and expense forms. A change listener applies the category filter. A delegated click listener handles Delete buttons created dynamically, and the Clear all button asks for confirmation before removing records. These handlers update the array, save it, and re-render the page.
 
-I used JavaScript variables to store important budgeting
-information.
+### Saving data
+The budget, expense array, and next record ID are saved in `localStorage`. On load, the app validates saved records before using them. If browser storage is unavailable or malformed, the tracker still starts and works for the current page session.
 
-Examples:
-- budgetAmount
-- totalExpenses
-- remainingBalance
-- expensesList
+## Challenges and solutions
 
-### 2. Data Types
+A key integration challenge was that the original HTML used IDs and table markup that did not match the selectors and list structure expected by the JavaScript and CSS. I resolved this by aligning the form, dashboard, and transaction-list markup with the app's selectors and by using one consistent design. I also made storage loading defensive so invalid saved data does not prevent the app from opening.
 
-The project uses different JavaScript data types:
+## Run and test
 
-- Number: Stores budget and expense amounts.
-- String: Stores expense names.
-- Array: Stores multiple expenses.
-- Object: Stores individual expense information.
+1. Open `index.html` in a modern browser (or use a local development server).
+2. Set a monthly budget and add expenses with a name, positive amount, and category.
+3. Check that totals, remaining balance, progress, and budget feedback change after each addition.
+4. Try filtering categories, deleting one expense, clearing all expenses, and reloading the page to verify saved data.
+5. Try invalid or empty values to check the validation messages.
 
-### 3. User Input
+## Files
 
-I used prompt() to collect budget and expense information
-from users.
-
-I also used HTML forms to allow users to enter their
-budget and expenses directly on the website.
-
-### 4. Budget Calculations
-
-I used JavaScript arithmetic to calculate the remaining
-balance.
-
-Formula:
-
-Remaining Balance = Total Budget - Total Expenses
-
-Example:
-
-Budget = KES 40,000
-Expenses = KES 12,000
-Remaining Balance = KES 28,000
-
-### 5. Functions
-
-I created reusable functions to organize the application.
-
-- calculateRemainingBalance(): Calculates the remaining money.
-- displayBudgetSummary(): Displays budget information.
-- addExpense(): Records a new expense.
-- displayExpenses(): Displays recorded expenses.
-
-### 6. Console Output
-
-I used console.log() to display budget information,
-expenses, and remaining balances in the browser console.
-
-## Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript
-
-## How to Run the Project
-
-1. Download or clone this repository.
-2. Open the project folder in VS Code.
-3. Open index.html in your browser.
-4. Set your budget.
-5. Add your expenses.
-6. Open the browser console using F12.
-7. Check the JavaScript output.
-
-## Author
-
-Margaret Akuch Deng
+- `index.html` — accessible page structure and forms.
+- `style.css` — responsive dashboard and interaction styles.
+- `script.js` — expense data, calculations, conditionals, DOM rendering, events, and browser storage.
+- `README.md` — project notes and implementation details.
