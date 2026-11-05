@@ -1,47 +1,64 @@
 # SpendWise — Interactive Budget Tracker
 
-SpendWise is a responsive budgeting app built with HTML, CSS, and vanilla JavaScript. Set a monthly budget, record expenses by category, and see your spending and remaining balance update on the dashboard.
+## Project description
 
-## Improvements made this week
+SpendWise is a responsive, browser-based monthly budget tracker built with vanilla HTML, CSS, and JavaScript. Set a budget, add expenses by category, review your spending and remaining balance, filter transactions, and remove expenses. The app saves data in the browser's `localStorage`.
 
-- Replaced the earlier console/prompt-focused flow with interactive budget and expense forms on the page.
-- Added a live dashboard with total budget, spending, remaining balance, expense count, budget progress, and biggest spending category.
-- Added expense categories, category filtering, individual deletion, and a clear-all action.
-- Added budget warnings, input validation, responsive styling, accessible labels/status feedback, and browser storage so data remains after a reload.
-- Aligned the HTML element IDs and classes with the JavaScript and stylesheet so all parts of the app work together.
+## Technologies used
 
-## JavaScript concepts
+- HTML5 for the page structure and accessible forms
+- CSS3 for responsive styling
+- Vanilla JavaScript for validation, calculations, interactions, and browser storage
+- Git and GitHub for source control
+- Netlify for static-site hosting and continuous deployment
 
-### Conditionals
-`evaluateBudget()` uses `if`/`else if` statements to decide which message and style to show: no budget, on track, approaching the limit, or over budget. Other conditionals validate form values, apply filters, and show empty-state messages.
+## GitHub repository information
 
-### Arrays and loops
-The `expenses` array stores multiple expense objects. Each record contains an ID, name, amount, and category. `for` loops process the records to calculate spending and category totals and to render the filtered transaction list. Array methods are used to remove records and validate loaded data.
+- Repository: [akuch79/spendwise-javascript](https://github.com/akuch79/spendwise-javascript)
+- Repository visibility: Public
+- Site files are in the repository root: `index.html`, `style.css`, and `script.js`.
 
-### DOM updates
-The `renderDashboard()` and `renderList()` functions update page content with `textContent`, element attributes, and generated DOM elements. After the data changes, `render()` refreshes the dashboard and transaction list. Expense names are added as text rather than HTML so user input is not interpreted as markup.
+## Live Netlify website URL
 
-### Events and user interactions
-Submit event listeners handle the budget and expense forms. A change listener applies the category filter. A delegated click listener handles Delete buttons created dynamically, and the Clear all button asks for confirmation before removing records. These handlers update the array, save it, and re-render the page.
+**Add the published Netlify URL here after deploying:** `https://YOUR-CUSTOM-SITE-NAME.netlify.app`
 
-### Saving data
-The budget, expense array, and next record ID are saved in `localStorage`. On load, the app validates saved records before using them. If browser storage is unavailable or malformed, the tracker still starts and works for the current page session.
+Replace the example URL above with the actual URL shown in your Netlify site settings before submitting. The Netlify deployment and live URL cannot be confirmed from this repository change alone.
 
-## Challenges and solutions
+## Deployment process summary
 
-A key integration challenge was that the original HTML used IDs and table markup that did not match the selectors and list structure expected by the JavaScript and CSS. I resolved this by aligning the form, dashboard, and transaction-list markup with the app's selectors and by using one consistent design. I also made storage loading defensive so invalid saved data does not prevent the app from opening.
+1. Push the complete project to the public GitHub repository.
+2. In Netlify, choose **Add new site → Import an existing project** and connect GitHub.
+3. Select `akuch79/spendwise-javascript` and authorize access if prompted.
+4. Configure the site as a static site. The included `netlify.toml` sets the repository root as the publish directory; no build command is required.
+5. Deploy the site, then choose a meaningful available Netlify site name under **Site configuration → Site details → Change site name**. The resulting address will be `https://YOUR-CUSTOM-SITE-NAME.netlify.app`.
+6. Add the actual live URL to the section above.
+7. Make a visible change, push it to the connected deployment branch, and check Netlify's **Deploys** page to confirm a new deploy completes. This commit changes the page's eyebrow text to “YOUR BUDGET, AT A GLANCE”; check for that text on the live page after deployment.
+8. Test the live site on desktop and mobile, including CSS/JavaScript loading, setting a budget, adding expenses, filtering, deleting, clearing, and reloading to confirm browser storage.
 
-## Run and test
+## Challenges encountered during deployment
 
-1. Open `index.html` in a modern browser (or use a local development server).
-2. Set a monthly budget and add expenses with a name, positive amount, and category.
-3. Check that totals, remaining balance, progress, and budget feedback change after each addition.
-4. Try filtering categories, deleting one expense, clearing all expenses, and reloading the page to verify saved data.
-5. Try invalid or empty values to check the validation messages.
+This project is a static site with no package manager or build step, so the important deployment configuration is making sure Netlify publishes the repository root where `index.html`, `style.css`, and `script.js` live. A second step that must be completed in Netlify is choosing an available custom subdomain. The actual Netlify deployment has not been run or verified as part of this repository update, so record any additional issues encountered there before submitting.
 
-## Files
+## Lessons learned
 
-- `index.html` — accessible page structure and forms.
-- `style.css` — responsive dashboard and interaction styles.
-- `script.js` — expense data, calculations, conditionals, DOM rendering, events, and browser storage.
-- `README.md` — project notes and implementation details.
+- Keep the entry-point HTML and its linked CSS and JavaScript in the published directory.
+- Static sites can be deployed without a build command when their files are already ready to serve.
+- Connecting GitHub to Netlify enables automatic deployments when the connected branch changes.
+- Confirm a deployment in Netlify and test the public URL; a successful GitHub push alone does not prove that the live site updated.
+- Update documentation with the real live URL rather than a guessed or placeholder address.
+
+## Submission steps
+
+1. Complete the Netlify deployment and set a custom site name.
+2. Verify the visible update appears on the live site after an automatic deployment.
+3. Test the deployed website and replace the placeholder in **Live Netlify website URL** with the real URL.
+4. Commit and push the updated README to GitHub, then confirm Netlify deploys that update too.
+5. Submit only this GitHub repository link through the LMS: <https://github.com/akuch79/spendwise-javascript>.
+
+## Project files
+
+- `index.html` — page structure and forms
+- `style.css` — responsive visual design
+- `script.js` — budget and expense behavior
+- `netlify.toml` — Netlify static-site publish configuration
+- `README.md` — project and deployment documentation
